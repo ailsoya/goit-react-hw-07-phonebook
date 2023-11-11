@@ -1,7 +1,8 @@
 import styles from "../Style.module.css"
+import { useEffect } from "react"
 import { getContacts, getFilter } from "redux/selectors"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteContact } from "redux/contactsSlice"
+import { deleteContact, fetchContacts } from "redux/operations"
 
 const getFilteredContacts = (contacts, filter) => {
     if(filter==='') {
@@ -20,6 +21,10 @@ export const ContactList = () => {
     const filter = useSelector(getFilter).value
     const dispatch = useDispatch()
     const filteredContacts = getFilteredContacts(contacts, filter)
+
+    useEffect(() => {
+        dispatch(fetchContacts())
+    }, [dispatch])
 
     const handleDelete = id => {
         dispatch(deleteContact(id))

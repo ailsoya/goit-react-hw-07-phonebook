@@ -1,7 +1,7 @@
 import styles from "../Style.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { getContacts } from "redux/selectors"
-import { addContact } from "redux/contactsSlice"
+import { addContact } from "redux/operations"
 
 export const ContactForm = () => {
     const dispatch = useDispatch()
@@ -16,7 +16,7 @@ export const ContactForm = () => {
                 return
             }
         }
-        dispatch(addContact(form.name.value, form.number.value))
+        dispatch(addContact({ name: form.name.value, number: form.number.value }))
         form.reset()
     }
 
